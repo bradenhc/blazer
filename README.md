@@ -1,0 +1,2 @@
+# blazer
+Minimalist blogging engine
