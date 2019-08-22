@@ -31,6 +31,15 @@ With the following available structural elements:
 - **Body**: additional details about the commit (if needed)
 - **Footer**: information about breaking changes (major semantic version), referenced issues
     - If breaking changes are present in the commit, the footer MUST begin with `BREAKING CHANGE: <details>`, where
-      `<details>` explains
+      `<details>` explains the breaking change and potentially how to upgrade from the old version to the new.
 
 Do not create a commit that does not contain changes that can fit into more than one category above. Likewise, do not create a commit unless the commit itself represents a single, complete unit that fits inside one of the categories above.
+
+## Change Log
+Change logs are meant to be human readable, and therefore this project's change log follows the principles outlined on [keepachangelog.com](https://keepachangelog.com/en/1.0.0/). Changes can be collected by referencing the Git commit logs according to the format described above. In summary, there are only six kinds of changes tracked in the change log:
+- `Added`: new features
+- `Changed`: existing feature updates/improvements
+- `Deprecated`: notice of features no longer receiving support that will soon be removed
+- `Removed`: features that have been removed
+- `Fixed`: bug fixes
+- `Security`: vulnerability patches
