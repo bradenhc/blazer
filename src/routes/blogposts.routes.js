@@ -6,5 +6,7 @@ const router = new Router();
 
 router.post('/blog-posts', validators.validateCreateRequest, handlers.handleCreateNewBlogPost);
 router.get('/blog-posts', handlers.handleGetManyBlogPosts);
+router.get('/blog-posts/:id', handlers.handleGetSingleBlogPost);
+router.patch('/blog-posts/:id', validators.validateUpdateRequest, handlers.handleUpdateBlogPost);
 
 module.exports = router.routes();

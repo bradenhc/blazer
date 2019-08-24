@@ -11,6 +11,14 @@ const CreateRequestSchema = Joi.object().keys({
     isPublished: Schema.isPublished.optional()
 });
 
+const UpdateRequestSchema = Joi.object().keys({
+    title: Schema.title.optional(),
+    summary: Schema.summary.optional(),
+    content: Schema.content.optional(),
+    tags: Schema.tags.optional(),
+    isPublished: Schema.isPublished.optional()
+});
+
 function validate(action, obj, schema) {
     let results = Joi.validate(obj, schema);
     if (results.error) {
@@ -24,6 +32,11 @@ function validate(action, obj, schema) {
 module.exports = {
     validateCreateRequest: async function(ctx, next) {
         validate('create', ctx.request.body, CreateRequestSchema);
+        await next();
+    },
+
+    validateUpdateRequest: async function(ctx, next) {
+        validate('update', ctx.request.body, UpdateRequestSchema);
         await next();
     }
 };
