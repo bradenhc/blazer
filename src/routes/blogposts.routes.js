@@ -8,5 +8,6 @@ router.post('/blog-posts', validators.validateCreateRequest, handlers.handleCrea
 router.get('/blog-posts', handlers.handleGetManyBlogPosts);
 router.get('/blog-posts/:id', handlers.handleGetSingleBlogPost);
 router.patch('/blog-posts/:id', validators.validateUpdateRequest, handlers.handleUpdateBlogPost);
+router.delete('/blog-posts/:id', handlers.handleDeleteBlogPost);
 
 module.exports = router.routes();

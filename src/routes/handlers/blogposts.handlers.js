@@ -62,5 +62,19 @@ module.exports = {
 
         ctx.status = HttpStatus.OK;
         ctx.body = blogPost;
+    },
+
+    handleDeleteBlogPost: async function(ctx) {
+        let id = ctx.params.id;
+        let repo = new BlogPostsRepository(ctx.dbconn);
+        let blogPost = await repo.get(id);
+        if (!blogPost) {
+            throw ResourceNotFoundError(`Failed to find blog post with ID ${id} to delete`);
+        }
+
+        await repo.remove(id);
+
+        ctx.status = HttpStatus.OK;
+        ctx.body = '';
     }
 };

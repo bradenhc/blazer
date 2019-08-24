@@ -63,4 +63,8 @@ module.exports = class BlogPostsRepository {
         delete doc.id;
         await this._conn.collection(CollectionName).updateOne({ _id: blogPost.id }, { $set: doc });
     }
+
+    async remove(id) {
+        await this._conn.collection(CollectionName).deleteOne({_id: id});
+    }
 };
