@@ -29,9 +29,13 @@ module.exports = class UsersRepository {
     /**
      *
      * @param {string} id
+     * @returns {User}
      */
     async get(id) {
-        return await this._conn.collection(CollectionName).findOne({ _id: id });
+        let doc = await this._conn.collection(CollectionName).findOne({ _id: id });
+        doc.id = doc._id;
+        delete doc._id;
+        return doc;
     }
 
     /**

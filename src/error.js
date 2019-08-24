@@ -13,6 +13,9 @@ module.exports = {
     RequestValidationError: (message, details) =>
         new BlazerError('RequestValidationError', HttpStatus.BAD_REQUEST, message, details),
 
+    ResourceNotFoundError: (message) =>
+        new BlazerError('ResourceNotFoundError', HttpStatus.NOT_FOUND, message, null),
+
     registerErrorMiddleware: function(app) {
         app.on('error', (err, ctx) => {
             console.log(ctx.request.url);
