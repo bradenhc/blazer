@@ -1,5 +1,6 @@
 const User = require('../../model/user.model');
 const UsersRepository = require('../../data-access/users.repo');
+const BlogPostsRepository = require('../../data-access/blogposts.repo');
 const HttpStatus = require('http-status-codes');
 const { ResourceNotFoundError } = require('../../error');
 
@@ -33,5 +34,13 @@ module.exports = {
         await repo.update(user);
         ctx.status = HttpStatus.OK;
         ctx.body = user;
+    },
+
+    handleGetBlogPostsForUser: async function(ctx) {
+        let id = ctx.params.id;
+        let blogPostsRepo = new BlogPostsRepository(ctx.dbconn);
+        let blogPosts = await blogPostsRepo.query({authorId: id});
+        ctx.status = HttpStatus.OK;
+        ctx.body = blogPosts;
     }
 };

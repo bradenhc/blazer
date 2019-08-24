@@ -26,10 +26,21 @@ module.exports = class BlogPostsRepository {
         await this._conn.collection(CollectionName).insertOne(doc);
     }
 
-    async query() {
+    /**
+     *
+     * @typedef {object} BlogPostsQueryOptions
+     * @property {string} authorId
+     *
+     * @param {BlogPostsQueryOptions} options
+     */
+    async query(options) {
+        let q = {};
+        if (options.authorId) {
+            q.authorId = options.authorId;
+        }
         let results = await this._conn
             .collection(CollectionName)
-            .find({})
+            .find(q)
             .toArray();
         return results.map(r => {
             r.id = r._id;
@@ -65,6 +76,6 @@ module.exports = class BlogPostsRepository {
     }
 
     async remove(id) {
-        await this._conn.collection(CollectionName).deleteOne({_id: id});
+        await this._conn.collection(CollectionName).deleteOne({ _id: id });
     }
 };
