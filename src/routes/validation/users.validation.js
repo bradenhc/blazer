@@ -1,6 +1,5 @@
 const Joi = require('@hapi/joi');
 const { Schema } = require('../../model/user.model');
-const HttpStatus = require('http-status-codes');
 const { RequestValidationError } = require('../../error');
 
 const CreateRequestSchema = Joi.object().keys({
@@ -10,12 +9,27 @@ const CreateRequestSchema = Joi.object().keys({
     email: Schema.email.required()
 });
 
+const UpdateRequestSchema = Joi.object().keys({
+    firstName: Schema.firstName.optional(),
+    lastName: Schema.lastName.optional(),
+    email: Schema.email.optional()
+});
+
+function validate(action, obj, schema) {
+    let results = Joi.validate(obj, schema);
+    if (results.error) {
+        throw RequestValidationError(`Invalid request to ${action} user`, results.error.details.map(d => d.message));
+    }
+}
+
 module.exports = {
     validateCreateRequest: async function(ctx, next) {
-        let results = Joi.validate(ctx.request.body, CreateRequestSchema);
-        if (results.error) {
-            throw RequestValidationError('Invalid request to create user', results.error.details.map(d => d.message));
-        }
+        validate('create', ctx.request.body, CreateRequestSchema);
+        await next();
+    },
+
+    validateUpdateRequest: async function(ctx, next) {
+        validate('update', ctx.request.body, UpdateRequestSchema);
         await next();
     }
 };

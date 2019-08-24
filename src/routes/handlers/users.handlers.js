@@ -22,5 +22,16 @@ module.exports = {
         }
         ctx.status = HttpStatus.OK;
         ctx.body = user;
+    },
+
+    handleUpdateUser: async function(ctx) {
+        let id = ctx.params.id;
+        let repo = new UsersRepository(ctx.dbconn);
+        let user = await repo.get(id);
+        user = { ...user, ...ctx.request.body};
+        user.updatedOn = new Date();
+        await repo.update(user);
+        ctx.status = HttpStatus.OK;
+        ctx.body = user;
     }
 };

@@ -46,6 +46,6 @@ module.exports = class UsersRepository {
         let doc = { ...user };
         doc._id = doc.id;
         delete doc.id;
-        await this._conn.collection(CollectionName).updateOne({ _id: user.id }, doc);
+        await this._conn.collection(CollectionName).updateOne({ _id: user.id }, { $set: doc });
     }
 };
