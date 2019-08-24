@@ -27,7 +27,10 @@ module.exports = class BlogPostsRepository {
     }
 
     async query() {
-        let results = await this._conn.collection(CollectionName).find({}).toArray();
+        let results = await this._conn
+            .collection(CollectionName)
+            .find({})
+            .toArray();
         return results.map(r => {
             r.id = r._id;
             delete r._id;
@@ -42,9 +45,12 @@ module.exports = class BlogPostsRepository {
      */
     async get(id) {
         let doc = await this._conn.collection(CollectionName).findOne({ _id: id });
-        doc.id = doc._id;
-        delete doc._id;
-        return doc;
+        if (doc) {
+            doc.id = doc._id;
+            delete doc._id;
+            return doc;
+        }
+        return null;
     }
 
     /**

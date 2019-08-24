@@ -33,9 +33,12 @@ module.exports = class UsersRepository {
      */
     async get(id) {
         let doc = await this._conn.collection(CollectionName).findOne({ _id: id });
-        doc.id = doc._id;
-        delete doc._id;
-        return doc;
+        if (doc) {
+            doc.id = doc._id;
+            delete doc._id;
+            return doc;
+        }
+        return null;
     }
 
     /**
