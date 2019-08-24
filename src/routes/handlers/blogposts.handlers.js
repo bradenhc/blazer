@@ -13,5 +13,13 @@ module.exports = {
         await repo.add(blogPost);
         ctx.status = HttpStatus.CREATED;
         ctx.body = blogPost;
+    },
+
+    handleGetManyBlogPosts: async function(ctx) {
+        let repo = new BlogPostsRepository(ctx.dbconn);
+        let blogPosts = await repo.query();
+        ctx.status = HttpStatus.OK;
+        ctx.body = blogPosts;
+    
     }
 };

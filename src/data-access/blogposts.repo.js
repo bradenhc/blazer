@@ -26,6 +26,15 @@ module.exports = class BlogPostsRepository {
         await this._conn.collection(CollectionName).insertOne(doc);
     }
 
+    async query() {
+        let results = await this._conn.collection(CollectionName).find({}).toArray();
+        return results.map(r => {
+            r.id = r._id;
+            delete r._id;
+            return r;
+        });
+    }
+
     /**
      *
      * @param {string} id
