@@ -10,7 +10,7 @@ class BlazerError {
 }
 
 module.exports = {
-    RequestValidationError: (message, details) =>
+    RequestValidationError: (message, details = null) =>
         new BlazerError('RequestValidationError', HttpStatus.BAD_REQUEST, message, details),
 
     ResourceNotFoundError: (message) =>
