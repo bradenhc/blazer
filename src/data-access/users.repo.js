@@ -42,6 +42,25 @@ module.exports = class UsersRepository {
     }
 
     /**
+     * @typedef {object} UserQueryOptions
+     * @property {string} username
+     * 
+     * @param {UserQueryOptions} options 
+     * @returns {User[]}
+     */
+    async query(options) {
+        let q = {};
+        if (options.username) {
+            q.username = username;
+        }
+        let result = await this._conn
+            .collection(CollectionName)
+            .find({ q })
+            .toArray();
+        return result;
+    }
+
+    /**
      *
      * @param {User} user
      */

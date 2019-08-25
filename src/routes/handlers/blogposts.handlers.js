@@ -2,11 +2,13 @@ const HttpStatus = require('http-status-codes');
 const BlogPost = require('../../model/blogpost.model');
 const BlogPostsRepository = require('../../data-access/blogposts.repo');
 const UsersRepository = require('../../data-access/users.repo');
-const { RequestValidationError, ResourceNotFoundError } = require('../../error');
+const { RequestValidationError, ResourceNotFoundError, ForbiddenError } = require('../../error');
 
 module.exports = {
     handleCreateNewBlogPost: async function(ctx) {
-        let { title, summary = null, content, tags = [], authorId, isPublished = false } = ctx.request.body;
+        let { title, summary = null, content, tags = [], isPublished = false } = ctx.request.body;
+
+        let authorId = ctx.jwt.sub;
 
         // Verify the author exists
         let usersRepo = new UsersRepository(ctx.dbconn);
@@ -55,6 +57,10 @@ module.exports = {
             throw ResourceNotFoundError(`Failed to find blog post with ID ${id} to update`);
         }
 
+        if (blogPost.authorId !== ctx.jwt.sub) {
+            throw ForbiddenError();
+        }
+
         let updates = ctx.request.body;
         blogPost = { ...blogPost, ...updates };
         blogPost.updatedOn = new Date();
@@ -70,6 +76,10 @@ module.exports = {
         let blogPost = await repo.get(id);
         if (!blogPost) {
             throw ResourceNotFoundError(`Failed to find blog post with ID ${id} to delete`);
+        }
+
+        if (blogPost.authorId !== ctx.jwt.sub) {
+            throw ForbiddenError();
         }
 
         await repo.remove(id);

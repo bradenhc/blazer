@@ -6,7 +6,11 @@ const CreateRequestSchema = Joi.object().keys({
     firstName: Schema.firstName.required(),
     lastName: Schema.lastName.required(),
     username: Schema.username.required(),
-    email: Schema.email.required()
+    email: Schema.email.required(),
+    password: Joi.string()
+        .min(12)
+        .max(128)
+        .required()
 });
 
 const UpdateRequestSchema = Joi.object().keys({

@@ -6,7 +6,6 @@ const CreateRequestSchema = Joi.object().keys({
     title: Schema.title.required(),
     summary: Schema.summary.optional(),
     content: Schema.content.required(),
-    authorId: Schema.authorId.required(),
     tags: Schema.tags.optional(),
     isPublished: Schema.isPublished.optional()
 });
