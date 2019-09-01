@@ -30,7 +30,7 @@ module.exports = (...allowedRoles) => pipelineData =>
                     return reject(UnauthorizedError());
                 }
 
-                if (!allowedRoles.some(r => jwt.roles.includes(r))) {
+                if (!allowedRoles.some(r => decoded.roles.includes(r))) {
                     return reject(UnauthorizedError());
                 }
 
