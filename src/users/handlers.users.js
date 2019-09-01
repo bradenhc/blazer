@@ -8,16 +8,15 @@ const { prepareUserResponse } = require('./response.users');
 const HttpStatus = require('http-status-codes');
 
 module.exports = {
-    handleGetSingleUser: dbConn => asyncPipe(transform, getUser(dbConn), prepareUserResponse(HttpStatus.OK)),
+    handleGetSingleUser: asyncPipe(transform, getUser, prepareUserResponse(HttpStatus.OK)),
 
-    handleUpdateSingleUser: dbConn =>
-        asyncPipe(
-            transform,
-            authorize('users:write'),
-            validateUpdateRequest,
-            getUser(dbConn),
-            updateExistingUser,
-            saveUser(dbConn),
-            prepareUserResponse(HttpStatus.OK)
-        )
+    handleUpdateSingleUser: asyncPipe(
+        transform,
+        authorize('users:write'),
+        validateUpdateRequest,
+        getUser,
+        updateExistingUser,
+        saveUser,
+        prepareUserResponse(HttpStatus.OK)
+    )
 };

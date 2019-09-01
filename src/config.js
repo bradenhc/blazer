@@ -8,6 +8,7 @@ module.exports = {
     // Database connection settings
     DATABASE_URL: env('DATABASE_URL'),
     DATABASE_NAME: env('DATABASE_NAME'),
+    DATABASE_POOL_SIZE: env('DATABASE_POOL_SIZE', 10),
 
     // Server settings
     PORT: parseInt(env('PORT', 3000)),

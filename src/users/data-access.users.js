@@ -1,9 +1,10 @@
 const { ResourceNotFoundError } = require('../error');
+const dbConn = require('../database-connection');
 
 const CollectionName = 'users';
 
 module.exports = {
-    saveUser: dbConn => async pipelineData => {
+    saveUser: async pipelineData => {
         let doc = { ...pipelineData.user };
         doc._id = doc.id;
         delete doc.id;
@@ -11,7 +12,7 @@ module.exports = {
         return pipelineData;
     },
 
-    getUser: dbConn => async pipelineData => {
+    getUser: async pipelineData => {
         let doc = await dbConn.collection(CollectionName).findOne({ _id: pipelineData.params.id });
         if (doc) {
             doc.id = doc._id;
@@ -23,7 +24,7 @@ module.exports = {
         throw ResourceNotFoundError(`Failed to find user with ID ${id}`);
     },
 
-    getUserByGithubId: dbConn => async pipelineData => {
+    getUserByGithubId: async pipelineData => {
         let doc = await dbConn.collection(CollectionName).findOne({ githubId: pipelineData.params.id });
         if (doc) {
             doc.id = doc._id;
