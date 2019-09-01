@@ -1,7 +1,6 @@
 const HttpStatus = require('http-status-codes');
 const BlogPost = require('../../model/blogpost.model');
 const BlogPostsRepository = require('../../data-access/blogposts.repo');
-const UsersRepository = require('../../data-access/users.repo');
 const { RequestValidationError, ResourceNotFoundError, ForbiddenError } = require('../../error');
 
 module.exports = {
