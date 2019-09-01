@@ -1,7 +1,7 @@
 const Koa = require('koa');
 const bodyparser = require('koa-bodyparser');
+const loginRoutes = require('./login/routes.login');
 const userRoutes = require('./users/routes.users');
-const tokenRoutes = require('./routes/tokens.routes');
 const blogPostRoutes = require('./routes/blogposts.routes');
 const dbConnectionMiddlware = require('./data-access/connection-middleware');
 const { registerErrorMiddleware } = require('./error');
@@ -17,7 +17,7 @@ app.use(dbConnectionMiddlware);
 
 app.use(bodyparser());
 
-app.use(tokenRoutes);
+app.use(loginRoutes);
 
 app.use(userRoutes);
 app.use(blogPostRoutes);

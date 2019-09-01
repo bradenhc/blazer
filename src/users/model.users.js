@@ -13,12 +13,13 @@ module.exports = {
         username: Joi.string()
             .alphanum()
             .max(56),
+        githubId: Joi.number().integer(),
         email: Joi.string().email(),
         createdOn: Joi.date(),
         updatedOn: Joi.date()
     },
 
-    createNewUser: pipelineData =>
+    createNewUser: async pipelineData =>
         Object.assign({}, pipelineData, {
             user: {
                 id: uuid(),
@@ -26,12 +27,13 @@ module.exports = {
                 lastName: pipelineData.body.lastName,
                 username: pipelineData.body.username,
                 email: pipelineData.body.email,
+                githubId: pipelineData.body.githubId,
                 createdOn: new Date(),
                 updatedOn: null
             }
         }),
 
-    updateExistingUser: pipelineData =>
+    updateExistingUser: async pipelineData =>
         Object.assign({}, pipelineData, {
             user: {
                 ...pipelineData.user,

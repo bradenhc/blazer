@@ -21,5 +21,17 @@ module.exports = {
             });
         }
         throw ResourceNotFoundError(`Failed to find user with ID ${id}`);
+    },
+
+    getUserByGithubId: dbConn => async pipelineData => {
+        let doc = await dbConn.collection(CollectionName).findOne({ githubId: pipelineData.params.id });
+        if (doc) {
+            doc.id = doc._id;
+            delete doc._id;
+            return Object.assign({}, pipelineData, {
+                user: doc
+            });
+        }
+        throw ResourceNotFoundError(`Failed to find user with GitHub ID ${pipelineData.params.id}`);
     }
 };
