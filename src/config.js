@@ -14,10 +14,7 @@ module.exports = {
     PORT: parseInt(env('PORT', 3000)),
     SILENT_MODE: env('SILENT_MODE') === 'true',
 
-    // Authentication settings
-    SALT_SIZE_BYTES: env('SALT_SIZE_BYTES', 16),
-    HASH_ALGORITHM: env('HASH_ALGORITHM', 'sha256'),
-
+    // Token settings
     JWT_SIGNING_SECRET: env('JWT_SIGNING_SECRET'),
     JWT_ISSUER: env('JWT_ISSUER'),
     JWT_AUDIENCE: env('JWT_AUDIENCE'),
