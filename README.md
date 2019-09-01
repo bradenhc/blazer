@@ -26,6 +26,7 @@ With the following available structural elements:
     - `build`: change that affects the build system or external dependencies (library updates, etc.)
     - `devops`: change that improves the development operation of the project (e.g. adding `husky` to provide easy Git
        hooks or changing CI/CD configuration files)
+    - `chore`; change that keeps code clean, such as removing forgotten, dead dependencies and code
     - `style`: changes (such as whitespace) that do not affect the meaning of the code
     - `docs`: documentation only changes
 - **Body**: additional details about the commit (if needed)
