@@ -4,7 +4,6 @@ const { handleCreateNewUser, handleGetSingleUser, handleUpdateSingleUser } = req
 
 const router = new Router();
 
-router.post('/users', functional(handleCreateNewUser));
 router.get('/users/:id', functional(handleGetSingleUser));
 router.patch('/users/:id', functional(handleUpdateSingleUser));
 
