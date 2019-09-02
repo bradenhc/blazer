@@ -30,12 +30,12 @@ function validate(action, obj, schema) {
 
 module.exports = {
     validateCreateRequest: async pipelineData => {
-        validate('create', pipelineData.body, CreateRequestSchema);
+        validate('create', pipelineData.payload, CreateRequestSchema);
         return pipelineData;
     },
 
     validateUpdateRequest: async pipelineData => {
-        validate('update', pipelineData.body, UpdateRequestSchema);
+        validate('update', pipelineData.payload, UpdateRequestSchema);
         return pipelineData;
     }
 };

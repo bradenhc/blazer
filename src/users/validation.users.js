@@ -28,7 +28,7 @@ function validate(action, obj, schema) {
 
 module.exports = {
     validateUpdateRequest: pipelineData => () => {
-        validate('update', pipelineData.body, UpdateRequestSchema);
+        validate('update', pipelineData.payload, UpdateRequestSchema);
         return pipelineData;
     }
 };

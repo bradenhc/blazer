@@ -21,13 +21,13 @@ module.exports = {
         Object.assign({}, pipelineData, {
             blogPost: {
                 id: uuid(),
-                title: pipelineData.body.title,
-                summary: pipelineData.body.summary,
-                content: pipelineData.body.content,
-                tags: pipelineData.body.tags || [],
-                authorId: pipelineData.user.id,
-                isPublished: pipelineData.body.isPublished || false,
-                publishedOn: pipelineData.body.isPublished ? new Date() : null,
+                title: pipelineData.payload.title,
+                summary: pipelineData.payload.summary,
+                content: pipelineData.payload.content,
+                tags: pipelineData.payload.tags || [],
+                authorId: pipelineData.token.sub,
+                isPublished: pipelineData.payload.isPublished || false,
+                publishedOn: pipelineData.payload.isPublished ? new Date() : null,
                 createdOn: new Date(),
                 updatedOn: null
             }
@@ -37,7 +37,7 @@ module.exports = {
         Object.assign({}, pipelineData, {
             blogPost: {
                 ...pipelineData.blogPost,
-                ...pipelineData.body,
+                ...pipelineData.payload,
                 updatedOn: new Date()
             }
         })

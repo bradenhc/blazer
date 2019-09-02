@@ -13,7 +13,8 @@ module.exports = {
     },
 
     getUser: async pipelineData => {
-        let doc = await dbConn.collection(CollectionName).findOne({ _id: pipelineData.params.id });
+        let id = pipelineData.userId;
+        let doc = await dbConn.collection(CollectionName).findOne({ _id: id });
         if (doc) {
             doc.id = doc._id;
             delete doc._id;
@@ -25,7 +26,8 @@ module.exports = {
     },
 
     getUserByGithubId: async pipelineData => {
-        let doc = await dbConn.collection(CollectionName).findOne({ githubId: pipelineData.params.id });
+        let id = pipelineData.githubId;
+        let doc = await dbConn.collection(CollectionName).findOne({ githubId: id });
         if (doc) {
             doc.id = doc._id;
             delete doc._id;
@@ -33,6 +35,6 @@ module.exports = {
                 user: doc
             });
         }
-        throw ResourceNotFoundError(`Failed to find user with GitHub ID ${pipelineData.params.id}`);
+        throw ResourceNotFoundError(`Failed to find user with GitHub ID ${id}`);
     }
 };

@@ -1,13 +1,10 @@
 module.exports = async ctx => ({
-    params: {
-        ...ctx.params
-    },
-    headers: {
-        ...ctx.request.headers
-    },
-    body: {
+    tokenRaw: ctx.request.headers.authorization,
+    token: null,
+    payload: {
         ...ctx.request.body
     },
-    user: null,
-    blogPost: null
+    blogPostId: ctx.params.id,
+    blogPost: null,
+    userId: null
 });

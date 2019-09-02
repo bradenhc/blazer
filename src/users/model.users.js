@@ -23,11 +23,11 @@ module.exports = {
         Object.assign({}, pipelineData, {
             user: {
                 id: uuid(),
-                firstName: pipelineData.body.firstName,
-                lastName: pipelineData.body.lastName,
-                username: pipelineData.body.username,
-                email: pipelineData.body.email,
-                githubId: pipelineData.body.githubId,
+                firstName: pipelineData.payload.firstName,
+                lastName: pipelineData.payload.lastName,
+                username: pipelineData.payload.username,
+                email: pipelineData.payload.email,
+                githubId: pipelineData.githubId,
                 createdOn: new Date(),
                 updatedOn: null
             }
@@ -37,7 +37,7 @@ module.exports = {
         Object.assign({}, pipelineData, {
             user: {
                 ...pipelineData.user,
-                ...pipelineData.body,
+                ...pipelineData.payload,
                 updatedOn: new Date()
             }
         })

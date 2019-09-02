@@ -83,7 +83,7 @@ router.get('/login/negotiate', async ctx => {
     let githubId = response.data.id;
 
     try {
-        var { user } = await getUserByGithubId({ params: { id: githubId } });
+        var { user } = await getUserByGithubId({ githubId });
     } catch (e) {
         // Check if it is a resource not found error. If it is, then we need to create a new user
         if (e.status === HttpStatus.NOT_FOUND) {
@@ -95,7 +95,7 @@ router.get('/login/negotiate', async ctx => {
             let email = response.data.email;
             let username = response.data.login;
 
-            var { user } = await createNewUser({ body: { firstName, lastName, username, email, githubId } });
+            var { user } = await createNewUser({ payload: { firstName, lastName, username, email }, githubId });
 
             await saveUser({ user });
         }

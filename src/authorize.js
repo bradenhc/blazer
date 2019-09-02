@@ -5,7 +5,7 @@ const { RequestValidationError, UnauthorizedError } = require('./error');
 
 module.exports = (...allowedRoles) => pipelineData =>
     new Promise((resolve, reject) => {
-        const { authorization } = pipelineData.headers;
+        const authorization = pipelineData.tokenRaw;
 
         if (!authorization) {
             return reject(RequestValidationError('Missing authorization header in request'));

@@ -13,7 +13,7 @@ module.exports = {
         transform,
         authorize('blog-posts:write'),
         validateCreateRequest,
-        async pipelineData => Object.assign({}, pipelineData, { params: { id: pipelineData.token.sub } }),
+        async pipelineData => Object.assign({}, pipelineData, { userId: pipelineData.token.sub }),
         getUser,
         createNewBlogPost,
         saveBlogPost,
