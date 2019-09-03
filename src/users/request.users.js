@@ -5,5 +5,6 @@ module.exports = async ctx => ({
         ...ctx.request.body
     },
     userId: ctx.params.id,
-    user: null
+    user: null,
+    blogPosts: []
 });

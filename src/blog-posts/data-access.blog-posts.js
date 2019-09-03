@@ -23,5 +23,23 @@ module.exports = {
             });
         }
         throw ResourceNotFoundError(`Failed to find blog post with ID ${id}`);
+    },
+
+    getBlogPostsForAuthor: async pipelineData => {
+        let id = pipelineData.userId;
+        let docs = await dbConn
+            .collection(CollectionName)
+            .find({ authorId: id })
+            .toArray();
+        if (docs) {
+            return Object.assign({}, pipelineData, {
+                blogPosts: docs.map(d => {
+                    d.id = d._id;
+                    delete d._id;
+                    return d;
+                })
+            });
+        }
+        return Object.assign({}, pipelineData, { blogPosts: [] });
     }
 };
