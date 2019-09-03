@@ -38,7 +38,11 @@ module.exports = {
             blogPost: {
                 ...pipelineData.blogPost,
                 ...pipelineData.payload,
-                updatedOn: new Date()
+                updatedOn: new Date(),
+                publishedOn:
+                    pipelineData.payload.isPublished && !pipelineData.blogPost.publishedOn
+                        ? new Date()
+                        : pipelineData.blogPost.publishedOn
             }
         })
 };
