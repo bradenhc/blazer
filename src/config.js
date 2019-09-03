@@ -1,3 +1,6 @@
+/*
+ * Provides configuration for the engine.
+ */
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
 }

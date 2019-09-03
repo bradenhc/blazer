@@ -1,3 +1,7 @@
+/*
+ * Start of the application engine. This is where all routes are registered and global middleware is applied to the
+ * request handler chain.
+ */
 const Koa = require('koa');
 const bodyparser = require('koa-bodyparser');
 const loginRoutes = require('./login/routes.login');

@@ -3,6 +3,13 @@ const { JWT_SIGNING_SECRET, JWT_ISSUER, JWT_AUDIENCE } = require('./config');
 
 const { RequestValidationError, UnauthorizedError } = require('./error');
 
+/**
+ * Provides an asynchronous pipeline function for authorization a request based on roles defined in the accompanying
+ * access token.
+ * 
+ * @param {...string} allowedRoles The roles that are required for authorization to pass
+ * @returns {function} The asynchronous pipeline function.
+ */
 module.exports = (...allowedRoles) => pipelineData =>
     new Promise((resolve, reject) => {
         const authorization = pipelineData.tokenRaw;
