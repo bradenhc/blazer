@@ -15,7 +15,7 @@ const UpdateRequestSchema = Joi.object().keys({
     summary: Schema.summary.optional(),
     content: Schema.content.optional(),
     tags: Schema.tags.optional(),
-    isPublished: Schema.tags.optional()
+    isPublished: Schema.isPublished.optional()
 });
 
 function validate(action, obj, schema) {
