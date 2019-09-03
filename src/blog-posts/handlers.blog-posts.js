@@ -6,6 +6,7 @@ const { createNewBlogPost, updateExistingBlogPost } = require('./model.blog-post
 const { saveBlogPost, getBlogPost } = require('./data-access.blog-posts');
 const { getUser } = require('../users/data-access.users');
 const { prepareBlogPostResponse } = require('./response.blog-posts');
+const { ensureBlogPostOwnership } = require('./authorize.blog-posts');
 const HttpStatus = require('http-status-codes');
 
 module.exports = {
@@ -27,6 +28,7 @@ module.exports = {
         authorize('blog-posts:write'),
         validateUpdateRequest,
         getBlogPost,
+        ensureBlogPostOwnership,
         updateExistingBlogPost,
         saveBlogPost,
         prepareBlogPostResponse(HttpStatus.OK)
