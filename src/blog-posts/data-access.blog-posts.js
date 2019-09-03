@@ -13,7 +13,8 @@ module.exports = {
     },
 
     getBlogPost: async pipelineData => {
-        let doc = await dbConn.collection(CollectionName).findOne({ _id: pipelineData.params.id });
+        let id = pipelineData.blogPostId;
+        let doc = await dbConn.collection(CollectionName).findOne({ _id: id });
         if (doc) {
             doc.id = doc._id;
             delete doc._id;
